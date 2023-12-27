@@ -1,26 +1,39 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import './global.custom.scss';
 
-function App() {
+import React, { lazy, Suspense } from 'react';
+import { Link, Navigate, Route, Routes } from 'react-router-dom';
+
+import ErrorBoundary from '@/components/ErrorBoundary';
+
+import s from './App.scss';
+
+const Admin = lazy(
+  () => import(/* webpackChunkName:'Admin', webpackPrefetch:true */ '@/pages/Admin')
+);
+const Home = lazy(
+  () => import(/* webpackChunkName:'Home', webpackPrefetch:true */ '@/pages/Home')
+);
+
+const App: React.FC = () => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className={s.AppBox}>
+      <nav>
+        <Link to='/admin'>admin</Link>
+        &nbsp;
+        <Link to='/home'>home</Link>
+      </nav>
+      <ErrorBoundary>
+        <Suspense fallback={<>loading...</>}>
+          <Routes>
+            {/* <Route path='/' element={<Admin />} /> */}
+            <Route path='admin/*' element={<Admin />} />
+            <Route path='home' element={<Home />} />
+            <Route path='*' element={<Navigate to='admin' />} />
+          </Routes>
+        </Suspense>
+      </ErrorBoundary>
     </div>
   );
-}
+};
 
 export default App;
