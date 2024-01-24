@@ -18,7 +18,7 @@ const Admin: React.FC = () => {
       <Button type='dashed'>Dashed</Button>
       <Button type='outline'>Outline</Button>
       <Button type='text'>Text</Button>
-      <IconLoading />
+      {/* <IconLoading style={{ fontSize: 24}} /> */}
       <IconFile />
       <IconLanguage />
       <IconGoogle />

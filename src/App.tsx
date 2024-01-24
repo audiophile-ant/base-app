@@ -4,6 +4,7 @@ import React, { lazy, Suspense } from 'react';
 import { Link, Navigate, Route, Routes } from 'react-router-dom';
 
 import ErrorBoundary from '@/components/ErrorBoundary';
+import  Loading  from '@/components/Loading' 
 
 import s from './App.scss';
 
@@ -23,7 +24,7 @@ const App: React.FC = () => {
         <Link to='/home'>home</Link>
       </nav>
       <ErrorBoundary>
-        <Suspense fallback={<>loading...</>}>
+        <Suspense fallback={<Loading/>}>
           <Routes>
             {/* <Route path='/' element={<Admin />} /> */}
             <Route path='admin/*' element={<Admin />} />
